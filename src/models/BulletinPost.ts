@@ -5,14 +5,16 @@ export default class BulletinPost {
   public message: string;
   public postDate: Date;
   public likes: number;
+  public imageUrl: string;
 
   //constructor 
-  constructor(subject: string, message: string) {
+  constructor(subject: string, message: string, imageUrl: string) {
     this.id = this.guid();
     this.subject = subject;
     this.message = message;
     this.postDate = new Date();
     this.likes = 0;
+    this.imageUrl = imageUrl || 'https://images.spot.im/v1/production/ozcl1imileazzca9toah'
   }
 
   addLike() {

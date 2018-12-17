@@ -1,18 +1,33 @@
 <template>
   <v-container grid-list-lg>
+    <v-card>
+      <v-card-text>
+        <v-hover v-model="buttonHovering">
+          <v-btn slot-scope="{ hover }" refs="button1">
+            Hello
+          </v-btn>
+        </v-hover>
+      </v-card-text>
+      <v-card-text>
+        <v-tooltip bottom v-model="showToolTip" :disabled="!buttonHovering">
+          <v-icon color="grey lighten-1" slot="activator">info</v-icon>
+          <span>Hi from down here!</span>
+        </v-tooltip>
+      </v-card-text>
+    </v-card>
     <v-layout wrap row>
       <v-flex xs12 sm6 md4 lg3 v-for="(b, i) in bulletinPosts" :key="i.subject + i" xs4>
         <v-card>
-          <!-- <v-img
-            :src=""
+          <v-img
+            :src="b.imageUrl"
             aspect-ratio="2.75"
-          ></v-img> -->
+          ></v-img>
           <v-card-title>
             <span class="headline text-xs-left mb-0">{{ b.subject }}</span>
             <v-spacer></v-spacer>
             <v-btn icon @click="removeBulletinPost(b.id)">
               <v-icon>
-                clear
+                more_vert
               </v-icon>
             </v-btn>
           </v-card-title>
@@ -60,13 +75,23 @@
                 v-model="newMessage"
               >
               </v-text-field>
+              <v-text-field
+                label="Image Url"
+                v-model="newImageUrl"
+              >
+              </v-text-field>
             </v-card-text>
             <v-card-actions>
               <v-btn flat outline large color="red darken-4" @click="dialog = false">
                 Cancel
               </v-btn>
               <v-spacer></v-spacer>
-              <v-btn flat outline large color="green darken-4" @click="addBulletinPost({ subject: newSubject, message: newMessage }); dialog = false">
+              <v-btn flat 
+                outline
+                large
+                color="green darken-4"
+                @click="addBulletinPost({ subject: newSubject, message: newMessage, imageUrl: newImageUrl }); dialog = false"
+              s>
                 Add
               </v-btn>
             </v-card-actions>
@@ -86,10 +111,13 @@ export default Vue.extend({
   name: 'bulletin-section',
   data () {       
     return {
-      dialog: false,
-      likeAdded: false,
-      newMessage: '',
-      newSubject: '',
+      buttonHovering: false,
+      showToolTip: false
+    }
+  },
+  watch: {
+    buttonHovering (newVal) {
+      this.showToolTip = newVal
     }
   },
   computed: {
@@ -109,6 +137,7 @@ export default Vue.extend({
     }
   },
   created () {
+    console.log(this.$refs.butt)
   },
 });
 </script>

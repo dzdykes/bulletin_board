@@ -9,8 +9,8 @@ export default new Vuex.Store({
     bulletinPosts: new Array<BulletinPost>()
   },
   mutations: {
-    addBulletinPost (state, { subject, message }) {
-      const b = new BulletinPost(subject, message)
+    addBulletinPost (state, { subject, message, imageUrl }) {
+      const b = new BulletinPost(subject, message, imageUrl)
       state.bulletinPosts.push(b);
     },
     removeBulletinPost (state, id) {
