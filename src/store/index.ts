@@ -1,10 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import BulletinPost from '../models/BulletinPost';
+import bulletins from './modules/bulletins'
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  modules: {
+    bulletins
+  },
   state: {
     bulletinPosts: new Array<BulletinPost>()
   },
