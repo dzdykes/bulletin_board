@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import BulletinPost from './models/BulletinPost';
+import BulletinPost from '../models/BulletinPost';
 
 Vue.use(Vuex);
 

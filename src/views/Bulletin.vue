@@ -1,20 +1,5 @@
 <template>
   <v-container grid-list-lg>
-    <v-card>
-      <v-card-text>
-        <v-hover v-model="buttonHovering">
-          <v-btn slot-scope="{ hover }" refs="button1">
-            Hello
-          </v-btn>
-        </v-hover>
-      </v-card-text>
-      <v-card-text>
-        <v-tooltip bottom v-model="showToolTip" :disabled="!buttonHovering">
-          <v-icon color="grey lighten-1" slot="activator">info</v-icon>
-          <span>Hi from down here!</span>
-        </v-tooltip>
-      </v-card-text>
-    </v-card>
     <v-layout wrap row>
       <v-flex xs12 sm6 md4 lg3 v-for="(b, i) in bulletinPosts" :key="i.subject + i" xs4>
         <v-card>
@@ -111,8 +96,11 @@ export default Vue.extend({
   name: 'bulletin-section',
   data () {       
     return {
-      buttonHovering: false,
-      showToolTip: false
+      dialog: false,
+      likeAdded: false,
+      newMessage: '',
+      newImageUrl: '',
+      newSubject: '',
     }
   },
   watch: {
@@ -133,12 +121,10 @@ export default Vue.extend({
     startAdd(): void {
       this.newMessage = ''
       this.newSubject = ''
+      this.newImageUrl = ''
       this.dialog = true
     }
-  },
-  created () {
-    console.log(this.$refs.butt)
-  },
+  }
 });
 </script>
 
