@@ -94,7 +94,7 @@ import { mapGetters, mapMutations } from 'vuex'
 
 export default Vue.extend({
   name: 'bulletin-section',
-  data () {       
+  data () {
     return {
       dialog: false,
       likeAdded: false,
@@ -104,7 +104,7 @@ export default Vue.extend({
     }
   },
   watch: {
-    buttonHovering (newVal) {
+    buttonHovering(newVal) {
       this.showToolTip = newVal
     }
   },

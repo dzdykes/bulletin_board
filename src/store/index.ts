@@ -28,7 +28,7 @@ export default new Vuex.Store({
 
   },
   getters: {
-    bulletinPosts: state => {
+    bulletinPosts: (state) => {
       return state.bulletinPosts
     }
   }

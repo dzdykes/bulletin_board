@@ -12,8 +12,10 @@
     "quotemark": [true, "single"],
     "indent": [true, "spaces", 2],
     "trailing-comma": false,
+    "semicolon": false,
     "interface-name": false,
     "ordered-imports": false,
+    "space-before-function-paren": false,
     "object-literal-sort-keys": false,
     "no-consecutive-blank-lines": false
   }

@@ -1,5 +1,5 @@
 export default class BulletinPost {
-  //field
+  // field
   public id: string;
   public subject: string;
   public message: string;
@@ -7,7 +7,7 @@ export default class BulletinPost {
   public likes: number;
   public imageUrl: string;
 
-  //constructor 
+  // constructor
   constructor(subject: string, message: string, imageUrl: string) {
     this.id = this.guid();
     this.subject = subject;
@@ -17,12 +17,14 @@ export default class BulletinPost {
     this.imageUrl = imageUrl || 'https://images.spot.im/v1/production/ozcl1imileazzca9toah'
   }
 
-  addLike() {
+  public addLike() {
     this.likes++;
   }
 
-  removeLike(): void {
-    this.likes > 0 && this.likes--;
+  public removeLike(): void {
+    if (this.likes) {
+      this.likes--;
+    }
   }
 
   private guid(): string {
