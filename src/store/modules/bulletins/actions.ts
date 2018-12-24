@@ -5,7 +5,7 @@ import {
   SET_BULLETINS,
   FETCH_USER_BULLETINS,
   SET_USER_BULLETINS,
-  CREATE_BULLETIN,
+  CREATE_BULLETINS,
   SET_CURRENT_BID
 } from '../../bulletins-types'
 
@@ -18,7 +18,7 @@ export const actions = {
     const res = await axios.get(`${BASEURL}Bulletins/User`, { params });
     return commit(SET_USER_BULLETINS, res.data);
   },
-  async [CREATE_BULLETIN] ( { commit }: any, request: any) {
+  async [CREATE_BULLETINS] ( { commit }: any, request: any) {
     const res = await axios.post(`${BASEURL}Bulletins`, request);
     return commit(SET_CURRENT_BID, res.data);
   }

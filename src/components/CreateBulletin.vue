@@ -135,7 +135,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapGetters, mapActions } from 'vuex'
-import * as types from '../store/bulletins-types';
+import * as bulletinsTypes from '../store/bulletins-types';
+import * as types from '../store/user-types';
 
 export default Vue.extend({
   name: 'createbulletin',
@@ -167,16 +168,13 @@ export default Vue.extend({
   },
   computed: {
     ...mapGetters({
-      currentBid: types.GET_CURRENT_BID
+      currentBid: bulletinsTypes.GET_BULLETINS
     }),
     b(): any  {
       return this.bulletin || {}
     }
   },
   methods: {
-    ...mapActions({
-      createBulletin: types.CREATE_BULLETIN
-    }),
     startAdd(prop: any) {
       this.currentProp = prop
       this.dialog = true
@@ -187,7 +185,7 @@ export default Vue.extend({
       this.dialog = false
     },
     validateAndCreate () {
-      this.createBulletin({
+      this.$store.dispatch(bulletinsTypes.CREATE_BULLETINS, {
         email: this.creatorEmail,
         name: this.bulletin.name,
         description: this.bulletin.description,
