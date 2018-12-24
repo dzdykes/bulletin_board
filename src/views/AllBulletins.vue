@@ -27,7 +27,7 @@
         md4
         lg3
       >
-        <bulletin :bulletin="props.item"></bulletin>
+        <bulletin :bulletin="props.item" @join="joinBulletin($event)"></bulletin>
       </v-flex>
     </v-data-iterator>
   </v-container>
@@ -36,7 +36,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Bulletin from '@/components/Bulletin.vue'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import * as types from '../store/bulletins-types'
 
 export default Vue.extend({
@@ -55,7 +55,15 @@ export default Vue.extend({
   methods: {
     ...mapActions({
       fetchBulletins: types.FETCH_BULLETINS
-    })
+    }),
+    ...mapMutations({
+      setBid: types.SET_CURRENT_BID
+    }),
+    joinBulletin (bid: string) {
+      console.log(bid)
+      this.setBid(bid)
+      this.$router.push({ name: 'join' })
+    }
   },
   created() {
     this.fetchBulletins()

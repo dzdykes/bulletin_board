@@ -34,7 +34,7 @@
     <v-card-actions>
       <div class="caption">{{ `Created: ${b.createDate}`}}</div>
       <v-spacer></v-spacer>
-      <v-btn small class="outline blue lighten-1 grey--text text--lighten-3" dark flat>
+      <v-btn small class="outline blue lighten-1 grey--text text--lighten-3" dark flat @click="joinBulletin(b.bulletinId)">
         <span class="caption">Join Bulletin</span>
       </v-btn>
     </v-card-actions>
@@ -43,6 +43,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import * as bulletinsTypes from '../store/bulletins-types';
+import { mapActions } from 'vuex'
 
 export default Vue.extend({
   name: 'Bulletin',
@@ -63,6 +65,11 @@ export default Vue.extend({
   computed: {
     b(): any  {
       return this.bulletin || {}
+    }
+  },
+  methods: {
+    joinBulletin(bid: string) {
+      this.$emit('join', bid)
     }
   }
 })

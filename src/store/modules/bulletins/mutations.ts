@@ -7,7 +7,7 @@ export const mutations = {
   [SET_USER_BULLETINS] (state: any, bulletins: any) {
     state.userBulletins = bulletins
   },
-  [SET_CURRENT_BID] (state: any, bid: string) {
+  [SET_CURRENT_BID] (state: any, bid: any) {
     state.currentBid = bid
   }
 }
