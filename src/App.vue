@@ -64,8 +64,6 @@ export default Vue.extend({
     'user' (newVal) {
       if (newVal.email) {
         this.fetchUserBulletins({ email: newVal.email, id: newVal.id })
-      } else {
-        this.$router.push('/')
       }
     },
     '$route.name' () {
@@ -85,6 +83,7 @@ export default Vue.extend({
     signOut () {
       this.setHasCreatedUser(false)
       this.setUser({})
+      this.$router.push('/')
     }
   },
   created () {

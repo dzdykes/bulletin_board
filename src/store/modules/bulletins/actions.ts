@@ -10,19 +10,16 @@ import {
 } from '../../bulletins-types'
 
 export const actions = {
-  [FETCH_BULLETINS] ( { commit }: any) {
-    return axios.get(`${BASEURL}Bulletins`)
-      .then((res: any) =>
-        commit(SET_BULLETINS, res.data))
+  async [FETCH_BULLETINS] ( { commit }: any) {
+    const res = await axios.get(`${BASEURL}Bulletins`);
+    return commit(SET_BULLETINS, res.data);
   },
-  [FETCH_USER_BULLETINS] ( { commit }: any, params: any) {
-    return axios.get(`${BASEURL}Bulletins/User`, { params })
-      .then((res: any) =>
-        commit(SET_USER_BULLETINS, res.data))
+  async [FETCH_USER_BULLETINS] ( { commit }: any, params: any) {
+    const res = await axios.get(`${BASEURL}Bulletins/User`, { params });
+    return commit(SET_USER_BULLETINS, res.data);
   },
-  [CREATE_BULLETIN] ( { commit }: any, request: any) {
-    return axios.post(`${BASEURL}Bulletins`, request)
-      .then((res: any) =>
-        commit(SET_CURRENT_BID, res.data))
+  async [CREATE_BULLETIN] ( { commit }: any, request: any) {
+    const res = await axios.post(`${BASEURL}Bulletins`, request);
+    return commit(SET_CURRENT_BID, res.data);
   }
 }
