@@ -3,9 +3,8 @@ import { mutations } from './mutations'
 import { actions } from './actions'
 
 const initialState = {
-  bulletins: [],
-  userBulletins: [],
-  currentBid: null
+  user: {},
+  hasCreatedUser: false
 }
 
 export default {

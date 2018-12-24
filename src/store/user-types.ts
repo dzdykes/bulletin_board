@@ -1,0 +1,6 @@
+export const FETCH_USER = 'user/FETCH_USER'
+export const SET_USER = 'user/SET_USER'
+export const GET_USER = 'user/GET_USER'
+export const CREATE_USER = 'user/CREATE_USER'
+export const SET_HASCREATEDUSER = 'user/SET_HASCREATEDUSER'
+export const GET_HASCREATEDUSER = 'user/GET_HASCREATEDUSER'

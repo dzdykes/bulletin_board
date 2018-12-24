@@ -1,38 +1,53 @@
 <template>
   <v-container class="home" grid-list-lg>
-    <v-layout row wrap>
-      <template v-for="b in bulletins">
-        <v-flex :key="b.bulletinId" xs12 sm6 md4 lg3>
-          <v-card>
-            <v-img
-              :src="b.rectangleImageUrl"
-              aspect-ratio="1.75"
-            ></v-img>
-            
-            <v-card-title primary-title>
-              <h3 class="headline mb-0">{{ b.name }}</h3>
-            </v-card-title>
+      <v-layout>
+        <v-flex xs12 sm4>  
+          <v-text-field
+            prepend-inner-icon="search"
+            solo
+            v-model="search"
+          >
 
-            <v-card-text>
-              <span class="subheading">{{ b.description }}</span>
-            </v-card-text>
-          </v-card>
+          </v-text-field>
         </v-flex>
-      </template>
-    </v-layout>
+      </v-layout>
+      <v-data-iterator
+      :items="bulletins"
+      :rows-per-page-items="[5]"
+      :search="search"
+      content-tag="v-layout"
+      row
+      wrap
+    >
+      <v-flex
+        slot="item"
+        slot-scope="props"
+        xs12
+        sm6
+        md4
+        lg3
+      >
+        <bulletin :bulletin="props.item"></bulletin>
+      </v-flex>
+    </v-data-iterator>
   </v-container>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import Vue from 'vue'
+import Bulletin from '@/components/Bulletin.vue'
 import { mapGetters, mapActions } from 'vuex'
 import * as types from '../store/bulletins-types'
 
 export default Vue.extend({
-  name: 'home',
+  name: 'allbulletins',
+  data () {
+    return {
+      search: ''
+    }
+  },
   components: {
-    HelloWorld,
+    Bulletin,
   },
   computed: mapGetters({
     bulletins: types.GET_BULLETINS
