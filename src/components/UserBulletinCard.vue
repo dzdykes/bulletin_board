@@ -8,14 +8,9 @@
     <v-card-title>
       <h3 class="headline mb-0">{{ b.name }}</h3>
       <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon>
-          more_vert
-        </v-icon>
-      </v-btn>
     </v-card-title>
 
-    <v-card-text>
+    <v-card-text v-if="false">
       <v-layout>
         <v-flex xs5 :order-xs2="reverse">
           <v-img
@@ -34,7 +29,7 @@
     <v-card-actions>
       <div class="caption">{{ `Updated: ${b.updateDate}`}}</div>
       <v-spacer></v-spacer>
-      <v-btn small class="outline blue lighten-1 grey--text text--lighten-3" dark flat>
+      <v-btn small class="outline blue lighten-1 grey--text text--lighten-3" dark flat @click="viewBoard">
         <span class="caption">View Board</span>
       </v-btn>
     </v-card-actions>
@@ -63,6 +58,12 @@ export default Vue.extend({
   computed: {
     b(): any  {
       return this.bulletin || {}
+    }
+  },
+  methods: {
+    viewBoard () {
+      const b = this.b
+      this.$emit('viewBoard', b)
     }
   }
 })

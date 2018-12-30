@@ -13,7 +13,7 @@
       </v-layout>
       <v-data-iterator
       :items="bulletins"
-      :rows-per-page-items="[5]"
+      :rows-per-page-items="[bulletins.length || 10]"
       :search="search"
       content-tag="v-layout"
       row
@@ -49,9 +49,11 @@ export default Vue.extend({
   components: {
     Bulletin,
   },
-  computed: mapGetters({
-    bulletins: types.GET_BULLETINS
-  }),
+  computed: {
+    ...mapGetters({
+      bulletins: types.GET_BULLETINS
+    })
+  },
   methods: {
     ...mapActions({
       fetchBulletins: types.FETCH_BULLETINS
@@ -60,7 +62,6 @@ export default Vue.extend({
       setBid: types.SET_CURRENT_BID
     }),
     joinBulletin (bid: string) {
-      console.log(bid)
       this.setBid(bid)
       this.$router.push({ name: 'join' })
     }

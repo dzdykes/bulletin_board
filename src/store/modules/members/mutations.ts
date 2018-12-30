@@ -6,6 +6,7 @@ export const mutations = {
   },
   [SET_MEMBERSHIP] (state: any, membership: any) {
     state.membership = membership
+    state.currentMID = membership.id
   },
   [SET_CURRENT_MID] (state: any, id: string) {
     state.currentMID = id

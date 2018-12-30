@@ -1,6 +1,6 @@
 <template>
-  <v-card>
-    <v-card-title class="headline">
+  <v-card class="elevation-20">
+    <v-card-title class="headline blue darken-4 blue-grey--text text--lighten-5">
       Welcome to Bulletin Board!
     </v-card-title>
     <v-card-text>
@@ -17,8 +17,8 @@
     </v-card-text>
     <v-divider></v-divider>
     <v-card-actions class="pa-0">
-      <v-btn block large class="blue lighten-1" @click="submit">
-        <span class="grey--text text--lighten-3">Become a Member</span>
+      <v-btn block large class="blue darken-2" @click="submit">
+        <span class="blue-grey--text text--lighten-5">Find A Bulletin</span>
       </v-btn>
     </v-card-actions>
   </v-card>

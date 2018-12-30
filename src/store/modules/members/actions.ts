@@ -15,7 +15,7 @@ export const actions = {
     return commit(SET_MEMBERS, res.data);
   },
   async [FETCH_MEMBERSHIP] ( { commit }: any, params: any) {
-    const res = await axios.get(`${BASEURL}BulletinMembers`, { params });
+    const res = await axios.get(`${BASEURL}BulletinMembers/member`, { params })
     commit(SET_CURRENT_MID, res.data.id || '')
     return commit(SET_MEMBERSHIP, res.data);
   },

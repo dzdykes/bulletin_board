@@ -5,7 +5,7 @@ export const getters = {
     return state.members
   },
   [GET_MEMBERSHIP] (state: any) {
-    return state.memberShip
+    return state.membership
   },
   [GET_CURRENT_MID] (state: any) {
     return state.currentMID

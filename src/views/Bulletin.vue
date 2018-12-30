@@ -4,17 +4,12 @@
       <v-flex xs12 sm6 md4 lg3 v-for="(b, i) in bulletinPosts" :key="i.subject + i" xs4>
         <v-card>
           <v-img
-            :src="b.imageUrl"
+            :src="b.rectangleImageUrl"
             aspect-ratio="2.75"
           ></v-img>
           <v-card-title>
             <span class="headline text-xs-left mb-0">{{ b.subject }}</span>
             <v-spacer></v-spacer>
-            <v-btn icon @click="removeBulletinPost(b.id)">
-              <v-icon>
-                more_vert
-              </v-icon>
-            </v-btn>
           </v-card-title>
           <v-card-text>
             <div>
@@ -24,8 +19,8 @@
           </v-card-text>
 
           <v-card-actions>
-            <v-btn block flat color="orange" @click="b.addLike()">Like</v-btn>
-            <v-btn block flat color="Blue" @click="b.removeLike()">DisLike</v-btn>
+            <v-btn block flat color="grey" disabled>Comment</v-btn>
+            <v-btn block flat color="blue">Recognize</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -61,8 +56,13 @@
               >
               </v-text-field>
               <v-text-field
-                label="Image Url"
-                v-model="newImageUrl"
+                label="Rec Image Url"
+                v-model="newImageUrlRec"
+              >
+              </v-text-field>
+              <v-text-field
+                label="Sq Image Url"
+                v-model="newImageUrlSq"
               >
               </v-text-field>
             </v-card-text>
@@ -75,7 +75,7 @@
                 outline
                 large
                 color="green darken-4"
-                @click="addBulletinPost({ subject: newSubject, message: newMessage, imageUrl: newImageUrl }); dialog = false"
+                @click="submit(); dialog = false"
               s>
                 Add
               </v-btn>
@@ -90,7 +90,10 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
+import * as memberTypes from '@/store/member-types'
+import * as userTypes from '../store/user-types'
+import * as types from '../store/bulletins-types'
 
 export default Vue.extend({
   name: 'bulletin-section',
@@ -99,31 +102,72 @@ export default Vue.extend({
       dialog: false,
       likeAdded: false,
       newMessage: '',
-      newImageUrl: '',
+      newImageUrlSq: '',
+      newImageUrlRec: '',
       newSubject: '',
+      loading: false
     }
   },
   watch: {
     buttonHovering(newVal) {
       this.showToolTip = newVal
+    },
+    bid (newVal) {
+      this.loading = true
+      this.fetchBulletinPosts({ bulletinId: newVal}).then(() => {
+        this.loading = false
+      })
     }
   },
   computed: {
-    ...mapGetters([
-      'bulletinPosts',
-    ])
+    ...mapGetters({
+      bid: types.GET_CURRENT_BID,
+      members: memberTypes.GET_MEMBERS,
+      membership: memberTypes.GET_MEMBERSHIP,
+      user: userTypes.GET_USER,
+      bulletinPosts: types.GET_BULLETIN_POSTS,
+      bulletin: types.GET_CURRENT_BULLETIN
+    }),
   },
   methods: {
-    ...mapMutations([
-      'addBulletinPost',
-      'removeBulletinPost',
-    ]),
+    ...mapActions({
+      fetchMembers: memberTypes.FETCH_MEMBERS,
+      fetchMembership: memberTypes.FETCH_MEMBERSHIP,
+      fetchBulletinPosts: types.FETCH_BULLETIN_POSTS,
+      createBulletinPost: types.CREATE_BULLETIN_POST
+    }),
+    ...mapMutations({
+      setMembership: memberTypes.SET_MEMBERSHIP
+    }),
     startAdd(): void {
       this.newMessage = ''
       this.newSubject = ''
-      this.newImageUrl = ''
+      this.newImageUrlRec = ''
+      this.newImageUrlSq = ''
       this.dialog = true
+    },
+    submit () {
+      const mid = this.membership.id
+      
+      this.loading = true
+      this.createBulletinPost({
+        memberId: mid,
+        subject: this.newSubject,
+        message: this.newMessage,
+        rectangleImageUrl: this.newImageUrlRec,
+        squareImageUrl: this.newImageUrlSq
+      }).then(() => {
+        this.fetchBulletinPosts({ bulletinId: this.bid}).then(() => {
+          this.loading = false
+        })
+      })
     }
+  },
+  created () {
+      this.loading = true
+      this.fetchBulletinPosts({ bulletinId: this.bid}).then(() => {
+        this.loading = false
+      })
   }
 });
 </script>

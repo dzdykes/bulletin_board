@@ -5,7 +5,10 @@ import { actions } from './actions'
 const initialState = {
   bulletins: [],
   userBulletins: [],
-  currentBid: null
+  currentBid: null,
+  currentBulletin: {},
+  bulletinPosts: [],
+  currentBPid: null
 }
 
 export default {

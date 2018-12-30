@@ -47,5 +47,21 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/JoinBulletin.vue'),
     },
+    {
+      path: '/viewboard',
+      name: 'viewboard',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/ConfirmViewBoard.vue'),
+    },
+    {
+      path: '/bulletin',
+      name: 'bulletin',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './views/Bulletin.vue'),
+    }
   ],
 });
